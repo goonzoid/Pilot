@@ -176,5 +176,21 @@ export default function Mixer (pilot) {
     this.run('BIT07;DIS00;WAH0F;CHE07;FEE00;TRE07;REV00;PHA0F;VIB01;CHO07')
   }
 
+  this.open = function () {
+    const fs = require('fs')
+    const { dialog, app } = require('electron').remote
+    let paths = dialog.showOpenDialog(app.win, { properties: ['openFile'] })
+    if (!paths) { console.log('Nothing to load') }
+    fs.readFile(paths[0], 'utf8', function (err, data) {
+      if (err) throw err
+      const lines = data.split('\n')
+      for (const line of lines) {
+        if (line.trim().length !== 0) {
+          this.run(line)
+        }
+      }
+    }.bind(this))
+  }
+
   function clamp (v, min, max) { return v < min ? min : v > max ? max : v }
 }
