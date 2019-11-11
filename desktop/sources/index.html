@@ -25,6 +25,7 @@
       controller.add("default","*","Quit",() => { app.exit() },"CmdOrCtrl+Q")
 
       controller.add("default","File","Open",() => { pilot.mixer.open() },"CmdOrCtrl+O")
+      controller.add("default","File","Save",() => { pilot.mixer.save() },"CmdOrCtrl+S")
       controller.add("default","File","Record",() => { pilot.recorder.toggle() },"CmdOrCtrl+R")
       controller.add("default","File","Stop Recording",() => { pilot.recorder.stop() },"Escape")
 
